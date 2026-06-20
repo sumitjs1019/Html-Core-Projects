@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project</title>
+</head>
+<body>
+  <h1>student result</h1>
+  <p id="result1"></p>
+  <script>
+    let marks = prompt("enter your marks");
+    let result;
+    if (marks >= 35) {
+      result = "pass";
+    } else {
+      result = "fail";
+    }
+    document.getElementById("result1").textContent = result;
+  </script>
+</body>
+</html>

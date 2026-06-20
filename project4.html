@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project</title>
+</head>
+<body>
+  <h1>Atm menu</h1>
+  <script>
+const CORRECT_PIN = "123";
+let balance = 5000;
+let transactions = ["Initial Balance: 5000"];
+
+let enteredPin = prompt("Enter your 4-digit ATM PIN:");
+if (enteredPin === CORRECT_PIN) {
+    let keepRunning = true;
+
+    while (keepRunning) {
+        
+        let choice = prompt(
+         "1. Check Balance\n" +
+         "2. Deposit Money\n" +
+         "3. Withdraw Money\n" +
+         "4. Mini Statement\n" +
+         "5. Exit\n" +
+         "Please enter your choice (1-5):"
+         )
+        switch (choice) {
+            case "1":
+                alert("Your current balance is: " + balance);
+                break;
+
+            case "2":
+                let depositAmount = parseFloat(prompt("Enter the amount to deposit:"));
+                if (!isNaN(depositAmount) && depositAmount > 0) {
+                    balance += depositAmount;
+                    transactions.push("Deposited: " + depositAmount);
+                    alert("₹" + depositAmount + " deposited successfully.\nNew Balance: " + balance);
+                } else {
+                    alert("Invalid deposit amount.");
+                }
+                break;
+
+            case "3":
+                let withdrawAmount = parseFloat(prompt("Enter the amount to withdraw:"));
+                if (!isNaN(withdrawAmount) && withdrawAmount > 0) {
+                    if (withdrawAmount > balance) {
+                        alert("Insufficient balance! Current balance: " + balance);
+                    } else {
+                        balance -= withdrawAmount;
+                        transactions.push("Withdrew: ₹" + withdrawAmount);
+                        alert("₹" + withdrawAmount + " withdrawn successfully.\nRemaining Balance: " + balance);
+                    }
+                } else {
+                    alert("Invalid withdrawal amount.");
+                }
+                break;
+
+            case "4":
+                let statement = "--- Mini Statement ---\n";
+                // Show last 5 transactions
+                let start = Math.max(0, transactions.length - 5);
+                for (let i = start; i < transactions.length; i++) {
+                    statement += transactions[i] + "\n";
+                }
+                statement += "Current Balance: ₹" + balance;
+                alert(statement);
+                break;
+
+            case "5":
+                alert("Thank you and visit again!");
+                keepRunning = false;
+                break;
+
+            default:
+                alert("Invalid choice! Please select an option between 1 and 5.");
+                break;
+        }
+    }
+} else {
+    alert("Incorrect PIN! Access Denied.");
+}
+</script>
+</body>
+</html>

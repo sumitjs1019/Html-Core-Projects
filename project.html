@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project</title>
+</head>
+<body>
+  <h1>shopping Discount</h1>
+  <p id="demo"></p>
+  <script>
+    let bill = prompt("enter your bill amount");
+    let discount = 0;
+    if (bill >= 5000) {
+      discount = 30;
+    } else if (bill >= 3000) {
+      discount = 20;
+    } else if (bill >= 1000) {
+      discount = 10;
+    } else {
+      discount = 0;
+    }
+    let finalAmount = bill - (bill * discount / 100);
+    document.getElementById("demo").innerHTML =
+      "original bill: RS. " + bill + "<br>" +
+      "discount: RS. " + discount + "<br>" +
+      "Amount to be paid: RS. " + finalAmount;
+  </script>
+</body>
+</html>
+

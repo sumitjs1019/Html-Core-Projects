@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Library Management System</h1>
+    <button id="show">Show All Books</button>
+    <button id="total">Show Total Books</button>
+    <input type="text" id="search" placeholder="Enter Books Name">
+    <button id="find">Find Book</button>
+    <div id="result"></div>
+    <script>
+        const library = {
+            name: "Nims Library",
+            books: [],
+            addBook(book){
+                this.books.push(book);
+            },
+            listBooks(){
+                const result = document.getElementById("result");
+                result.innerHTML = `<h3>Books in ${this.name} </h3>`;
+                this.books.forEach((book, index) =>{
+                    result.innerHTML += `
+                    <div class="book">
+                        <h4>${index + 1}. ${book.title}</h4>
+                        <p>Author : ${book.author}</p>
+                        <p> Year : ${book.year}</p>
+                    </div>
+                    `;
+                });
+            },
+            totalBooks(){
+                const result = document.getElementById("result");
+                result.innerHTML = `<h3>Total Books: ${this.books.length}</h3>`;
+            },
+            findBook(title){
+                const book = this.books.find(
+                    (book) => book.title.toLowerCase() === title.toLowerCase()
+                );
+                const result = document.getElementById("result");
+                if(book){
+                    result.innerHTML = `
+                    <h3>Book Found</h3>
+                    <div class="book">
+                        <h4>${book.title}</h4>
+                        <p>Author : ${book.author}</p>
+                        <p> Year : ${book.year}</p>
+                    </div>
+                    `;
+                } else {
+                    result.innerHTML = `<h3>Book Not Found</h3>`;
+                }
+            }
+        };
+
+        library.addBook({ 
+            title: "Twisted Games",
+            author: "Ana Huang", 
+            year: 2021 
+        });
+        library.addBook({ 
+            title: "Twisted lies", 
+            author: "Ana Huang",
+            year: 2020
+        });
+        library.addBook({ 
+            title: "god of wrath",
+            author: "Ana Huang", 
+            year: 2024 
+        });
+        library.addBook({
+            title: "King of pride",
+            author: "Ana Huang",
+            year: 2023
+        });
+        library.addBook({
+            title: "King of greed", 
+            author: "Ana Huang",
+            year: 2022
+        });
+        library.addBook({
+            title: "King of Gluttony", 
+            author: "Ana Huang",
+            year: 2024 
+        });
+
+        document.getElementById("show").addEventListener("click", () => {
+            library.listBooks();
+        });
+
+        document.getElementById("total").addEventListener("click", () => {
+            library.totalBooks();
+        });
+
+        document.getElementById("find").addEventListener("click", () => {
+            const title = document.getElementById("search").value;
+            library.findBook(title);
+        });
+    </script>
+</body>
+</html>
